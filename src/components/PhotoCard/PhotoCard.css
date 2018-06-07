@@ -1,0 +1,45 @@
+.PhotoCard {
+  width: 100%;
+  border: solid;
+  margin: 12px;
+  padding: 12px;
+  background-color: white;
+}
+
+.PhotoCard .Image {
+  text-align: center;
+}
+
+.PhotoCard .Subtitle {
+  font-weight: 700;
+}
+
+.PhotoCard .Info {
+  padding: 12px 12px 0 12px;
+}
+.PhotoCard .Info .Description{
+  margin-top: 12px;
+}
+
+@media (min-width: 580px) {
+  .PhotoCard {
+    width: 236px;
+  }
+
+}
+
+@media (min-width: 776px) {
+  .PhotoCard {
+    width: 334px;
+  }
+}
+
+@media (min-width: 992px) {
+  .PhotoCard {
+    width: 336px;
+  }
+}
+
+@media (min-width: 1200px) {
+
+}
