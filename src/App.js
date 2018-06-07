@@ -3,6 +3,7 @@ import logo from './logo.svg';
 
 import FlickrApiService from './api';
 
+import SearchBar from './components/SearchBar';
 import PhotoCard from './components/PhotoCard';
 import PhotoCardList from './components/PhotoCardList';
 
@@ -14,6 +15,8 @@ class App extends Component {
     this.state = {
       items: []
     }
+
+    this.onSearch = this.onSearch.bind(this);
   }
 
   componentDidMount() {
@@ -26,9 +29,16 @@ class App extends Component {
     });
   }
 
+  onSearch(text) {
+    this.getPhotos({
+      tag: text
+    });
+  }
+
   render() {
     return (
       <div className="App">
+        <SearchBar onSearch={this.onSearch} />
         <PhotoCardList items={this.state.items}/>
       </div>
     );
