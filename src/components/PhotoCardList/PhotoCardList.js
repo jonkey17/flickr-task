@@ -8,7 +8,7 @@ const PhotoCardList = ({items=[]}) => {
   return (
     <div className="PhotoCardList">
     {
-      items.map((item) => (<PhotoCard item={item} key={item.link}/>))
+      items.map((item, index) => (<PhotoCard item={item} key={index}/>))
     }
     </div>
   );

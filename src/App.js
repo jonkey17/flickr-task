@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import InfiniteScroll from 'react-infinite-scroller';
 
 import FlickrApiService from './api';
 
@@ -16,29 +16,35 @@ class App extends Component {
     this.state = {
       items: [],
       isLoading: false,
+      tag: ''
 
     }
 
     this.onSearch = this.onSearch.bind(this);
+    this.onLoadMore = this.onLoadMore.bind(this);
+
   }
 
-  componentDidMount() {
-    this.getPhotos();
-  }
-
-  getPhotos(options){
-    this.setState({isLoading: true});
-    FlickrApiService.getPhotos(options).then(res => {
-      this.setState({items: res.items});
-      this.setState({isLoading: false});
-    });
+  getPhotos(options) {
+    if(!this.state.isLoading){
+      this.setState({isLoading: true});
+      FlickrApiService.getPhotos(options).then(res => {
+        const stateItems = this.state.items.slice();
+        this.setState({items: stateItems.concat(res.items)});
+        this.setState({isLoading: false});
+      });
+    }
   }
 
   onSearch(text) {
-    this.setState({items: []});
+    this.setState({items: [], tag: text});
     this.getPhotos({
       tag: text
     });
+  }
+
+  onLoadMore(){
+    this.getPhotos({tag: this.state.tag})
   }
 
   showSpinner() {
@@ -49,11 +55,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <SearchBar onSearch={this.onSearch} />
-        <PhotoCardList items={this.state.items}/>
-        {this.showSpinner()}
-      </div>
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={this.onLoadMore}
+        hasMore={true}>
+        <div className="App">
+          <SearchBar onSearch={this.onSearch} />
+          <PhotoCardList items={this.state.items}/>
+          {this.showSpinner()}
+        </div>
+      </InfiniteScroll>
     );
   }
 }

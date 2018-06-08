@@ -2,7 +2,7 @@ import React from 'react';
 
 import './PhotoCard.css'
 const getAuthorName = (author) => {
-  const name = author.split('\"');
+  const name = author.split('"');
   return name[1].replace(/\s/g, '');
 }
 
@@ -19,7 +19,7 @@ const PhotoCard = ({item={}}) => {
     return (
       <div className="PhotoCard">
         <div className="Image">
-          <img src={item.media.m} />
+          <img src={item.media.m} alt=""/>
         </div>
         <div className="Info">
           <div className="Title">

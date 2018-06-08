@@ -22,11 +22,6 @@ describe('App', () => {
     shallow(<App />);
   });
 
-  it('calls the API service', () => {
-    const component = shallow(<App />);
-    expect(FlickrApiService.getPhotos.mock.calls[0][0]).toBe();
-  });
-
   it('when getPhotos is call updates state with API response', async() => {
     const component = shallow(<App />);
     const response = FlickrApiResponseMock.json();
